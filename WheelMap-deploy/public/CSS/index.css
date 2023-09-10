@@ -6,6 +6,7 @@ html,
 body{
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 #box {
     width: 100%;
@@ -29,6 +30,17 @@ i{
     align-items: center;
     padding: 3% 2% 3% 2%;
 }
+form{
+    display: flex;
+    width: 88vw;
+}
+input{
+    width: 100%;
+}
+button{
+    border: none;
+    background-color: white;
+}
 .flex{
     display: flex;
     column-gap: 5%;
@@ -39,8 +51,10 @@ input{
     font-size: 1rem;
 }
 #map {
+    position: absolute;
     width : 100%;
     height: 100%;
+    top: -750px;
 }
 #footer {
     position: absolute;
