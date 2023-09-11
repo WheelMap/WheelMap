@@ -45,6 +45,10 @@ button{
     display: flex;
     column-gap: 5%;
 }
+.flex > *{
+    z-index: 1;
+
+}
 input{
     border: 0px;
     outline: none;
