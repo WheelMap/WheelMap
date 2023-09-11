@@ -7,7 +7,12 @@ const db = mysql.createConnection({
   database: 'wm'
 });
 
-
+app.post('/search',function(request, response){   
+  var body = request.body;
+  
+  console.log('body : ' + body);
+   //input으로 받은 menu 값 출력 확인
+});
 
 
 db.connect((err) => {
