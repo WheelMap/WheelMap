@@ -1,8 +1,30 @@
+const express = require('express');
+const mysql = require('mysql');
+const app = express();
+
 var map;
  var latitude;
  var longitude;
+ var endlatitude;
+ var endlongitude;
+ var locationArr=[];
 
-// 위치 정보를 가져오는 비동기 함수
+ // MySQL 접속 설정
+const conn = {
+    host: 'localhost',
+    port: '3306',
+    user: 'root',
+    password: '990327',
+    database: 'charge'
+  };
+  
+  const connection = mysql.createConnection(conn);
+  connection.connect();
+  
+  const port = 3000;
+  
+
+ // 위치 정보를 가져오는 비동기 함수
 function getUserLocation() {
     return new Promise(function(resolve, reject){
         navigator.geolocation.getCurrentPosition(function(position){
@@ -14,13 +36,9 @@ function getUserLocation() {
         });
     });
 }
- // 페이지가 로딩이 된 후 호출하는 함수
+ // 페이지가 로딩이 된 후 호출하는 함수입니다.
 async function initializeMap(){
-    try{
         await getUserLocation();
-        // api 불러오기
-        var headers = {};
-        headers["appKey"] = "q1hz24YqUC7g84TRhAW3v8a52xq51B3472o9tPeF";
         // map 생성
         // Tmapv3.Map을 이용하여, 지도가 들어갈 div, 넓이, 높이를 설정합니다.
         map = new Tmapv2.Map("map", { // 지도가 생성될 div
@@ -37,10 +55,8 @@ async function initializeMap(){
             iconSize: new Tmapv2.Size(14, 14),
             map: map
         });
-    } catch (error) {
-        console.log("Error", error);
-    }
 
+      
 }
 
 async function initTmap(){
@@ -56,61 +72,63 @@ function detectLocationChange({ coords, timestamp }) {
     longitude = coords.longitude; // 경도
 }
 
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const mysql = require('mysql');
+async function calculateDistance(endLatitude, endlongitude){
+    return new Promise (function (resolve, reject){
+     var headers = {};
+     headers["appKey"] = "q1hz24YqUC7g84TRhAW3v8a52xq51B3472o9tPeF";
 
-// const app = express();
-// const port = 3000;
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+     $.ajax({
+         method: "POST",
+         headers: headers,
+         url: "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&format=json&callback=result",
+         async: false,
+         data: {
+             "startX": longitude.toString(),
+             "startY": latitude.toString(),
+             "endX": endLatitude.toString(),
+             "endY": endlongitude.toString(),
+             "reqCoordType": "WGS84GEO",
+             "resCoordType": "EPSG3857",
+             "startName": "출발지",
+             "endName": "도착지"
+           },
+           success: function(response) {
+             var resultData = response.features;
+             var tDistance = (resultData[0].properties.totalTime/60).toFixed(0);
+             return tDistance;
+           }
+        });
+    });
+}
 
-// const conn = {
-//   host: 'localhost',
-//   port: '3306',
-//   user: 'root',
-//   password: '990327',
-//   database: 'charge'
-// };
+app.get('/search', (req, res) => {
+    try{
+        const distanceQuery = " SELECT id, facility_name, latitude, longitude from charge";
 
-// var connection = mysql.createConnection(conn);
-// connection.connect();
+    connection.query(distanceQuery, async function (err, results, fields) {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ error: "Database error" });
+        }
+        
+        for(var row of results){
+            var endLatitude = row.latitude;
+            var endlongitude = row.longitude;
+        }
+        var distace = await calculateDistance(endLatitude, endlongitude);
 
-// //위치 정보를 기반으로 데이터 가져오기
-// app.post("/", async(req, res)=> {
-//     try{
-//         await getUserLocation();
-//         const distanceQuery = `
-//         SELECT *, 6371 * acos(
-//             cos(radians(${latitude})) * cos(radians(latitude)) * cos(radinas(longitude)-radians(${longitude})) +
-//             sin(radians(${latitude})) * sin(radinas(latitude))
-//             ) AS distance
-//             FROM charge
-//             ORDER BY distance
-//             LIMIT 5`;
+        locationArr.push(distance);
+    });
+}catch(error){
+    console.log("Error", error);
+    res.status(500).json({error: "Internal server error"});
+}
 
-//             connection.query(distanceQuery, function(err, results, fields){
-//                 if(err){
-//                     console.log(err);
-//                     res.status(500), json({error:"Database error"});
-//                 } else {
-//                     res.json({data: results});
-//                 }
-//             });
-//     } catch(error){
-//         console.log("Error", error);
-//         res.status(500).json({error : "Internal server error"});
-//     }
-// })
+console.log(locationArr);
+});
+    
 
-// // 클라이언트의 GET 요청을 처리하는 라우터
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/index.html');
-// });
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
 
-// // 정적 파일 서빙
-// app.use(express.static(__dirname));
-
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });

@@ -14,6 +14,8 @@
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         <script src="http://127.0.0.1:5501/server.js" type="commonjs"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./indexND.js"></script>
+
     </head>
     <body>
     
@@ -57,6 +59,7 @@
     </div>
 
     <script>
+
         function initTmap() {
         }
     
@@ -107,6 +110,22 @@
             })
             .catch(error => {
                 console.error('오류 발생: ', error);
+            });
+        });
+
+        $(document).ready(function() {
+            // 페이지 로드 후 서버로 데이터 요청을 보냅니다.
+            $.ajax({
+                type: 'GET',
+                url: '/search',
+                dataType: 'text',
+                success: function(response) {
+                    // 서버에서 받은 데이터를 c2 클래스의 요소에 추가합니다.
+                    $('#c2').html(response);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
             });
         });
     </script>
