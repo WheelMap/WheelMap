@@ -1,54 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="page-enter" content="blendTrans(duration=0.5)">
-        <meta http-equiv="page-exit" content="blendTrans(duration=0.5)">
-        <title>Document</title>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=q1hz24YqUC7g84TRhAW3v8a52xq51B3472o9tPeF"></script>
-        <link rel="stylesheet" href="CSS/index.css">
-        <link rel="stylesheet" href="CSS/all.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        <script src="http://127.0.0.1:5501/server.js" type="commonjs"></script>
-        <script src="./indexND.js"></script>
 
-    </head>
-    <body>
-    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="page-enter" content="blendTrans(duration=0.5)">
+    <meta http-equiv="page-exit" content="blendTrans(duration=0.5)">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+        src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=q1hz24YqUC7g84TRhAW3v8a52xq51B3472o9tPeF"></script>
+    <link rel="stylesheet" href="CSS/index.css">
+    <link rel="stylesheet" href="CSS/all.css">
+    <script src="./JS/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="http://127.0.0.1:5501/server.js" type="commonjs"></script>
+</head>
+
+<body>
+
     <div id="box">
         <div class="nav container">
             <div class="flex">
                 <div class="nav-toggle" id="nav_toggle">
                     <i class='bx bx-menu' style="font-size: 1.5rem;"></i>
                 </div>
-                <input type="text" placeholder="장소를 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='장소를 입력하세요'" >
+                <input type="text" placeholder="장소를 입력하세요" onfocus="this.placeholder=''"
+                    onblur="this.placeholder='장소를 입력하세요'">
             </div>
             <div>
                 <i class='bx bx-search' style="font-size: 1.5rem;"></i>
             </div>
         </div>
         <div id="map">
+
             <body onload="initTmap()"><!-- 맵 생성 실행 -->
                 <div id="map_div" style="height: 800px;"></div>
             </body>
         </div>
         <div id="footer">
             <div id="a2">
-                
+
                 <i class='bx bxs-battery-charging'></i>
-                <span id = "footer_text">가까운 충전소</span>
+                <span id="footer_text">가까운 충전소</span>
             </div>
-            <div id="c2" class="spotbox" onclick="location.href='navigation.html'">
-                신길역 230m
+            <div id="c2" class="spotbox" onclick="moveToNavigation1()">
             </div>
-            <div id="d2" class="spotbox">
-                양평2동주민센터 542m
+            <div id="d2" class="spotbox" onclick="moveToNavigation2()">
             </div>
-            <div id="e2" class="spotbox">
-                신길4동주민센터 1.2km
+            <div id="e2" class="spotbox" onclick="moveToNavigation3()">
             </div>
             <button class="more">
                 <hr>
@@ -58,76 +60,130 @@
     </div>
 
     <script>
-
-        function initTmap() {
-        }
-    
         initTmap();
-    
-        document.getElementById('search-form').addEventListener('submit', function (e) {
-            e.preventDefault(); // 기본 동작 방지 (페이지 새로고침)
-    
-            const searchQuery = document.getElementById('search-query').value;
-    
-            console.log(searchQuery);
-            // 서버에 POST 요청 보내기
-            fetch('/search', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'text',
-                },
-            })
-            .then(response => response)
-            .then(data => {
-                const resultsList = document.getElementById('results-list');
-                const noResultsMessage = document.getElementById('no-results-message');
-    
-                // 결과 목록 초기화
-                if (resultsList) {
-                    resultsList.innerHTML = '';
-                }
-    
-                if (data.results && data.results.length > 0) {
-                    // 검색 결과가 있을 경우, 목록에 결과 추가
-                    data.results.forEach(result => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = result.facility_name; // 결과 필드에 따라 수정
-                        if (resultsList) {
-                            resultsList.appendChild(listItem);
-                        }
-                    });
-    
-                    if (noResultsMessage) {
-                        noResultsMessage.style.display = 'none'; // 결과 메시지 숨기기
-                    }
-                } else {
-                    // 검색 결과가 없을 경우 메시지 표시
-                    if (noResultsMessage) {
-                        noResultsMessage.style.display = 'block';
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('오류 발생: ', error);
-            });
-        });
+        var latitude;
+        var longitude;
 
-        $(document).ready(function() {
-            // 페이지 로드 후 서버로 데이터 요청을 보냅니다.
-            $.ajax({
-                type: 'GET',
-                url: '/search',
-                dataType: 'text',
-                success: function(response) {
-                    // 서버에서 받은 데이터를 c2 클래스의 요소에 추가합니다.
-                    $('#c2').html(response);
-                },
-                error: function(err) {
-                    console.log(err);
+        async function getUserLocation() {
+            return new Promise(function (resolve, reject) {
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        latitude = position.coords.latitude;
+                        longitude = position.coords.longitude;
+                        resolve({ latitude, longitude });
+                    }, function (error) {
+                        reject(error);
+                    });
+                } else {
+                    reject(new Error("브라우저가 위치 정보를 지원하지 않습니다."));
                 }
             });
-        });
+        }
+
+        async function sendLocationDataToServer() {
+            try {
+                const { latitude, longitude } = await getUserLocation();
+                console.log(latitude);
+                console.log(longitude);
+
+                // 위도와 경도를 서버로 전송
+                const response = await axios.get(`http://localhost:3000/sendLocation?latitude=${latitude}&longitude=${longitude}`);
+
+                if (response.status === 200) {
+                    console.log('위치 정보가 서버로 전송되었습니다.');
+                    console.log('서버 응답 데이터:', response.data);
+
+                    document.getElementById("c2").dataset.longitude=response.data[0].longitude;
+                    document.getElementById("c2").dataset.latitude=response.data[0].latitude;
+                    document.getElementById("d2").dataset.longitude=response.data[1].longitude;
+                    document.getElementById("d2").dataset.latitude=response.data[1].latitude;
+                    document.getElementById("e2").dataset.longitude=response.data[2].longitude;
+                    document.getElementById("e2").dataset.latitude=response.data[2].latitude;
+
+                    document.getElementById("c2").innerHTML = response.data[0].facility_name + " " + Math.floor(response.data[0].distance ) + "m";
+                    document.getElementById("d2").innerHTML = response.data[1].facility_name + " " + Math.floor(response.data[1].distance )+ "m";
+                    document.getElementById("e2").innerHTML = response.data[2].facility_name + " " + Math.floor(response.data[2].distance )+ "m";
+                } else {
+                    console.error('위치 정보 전송 실패');
+                }
+            } catch (error) {
+                console.error('위치 정보를 가져오는 중 오류 발생:', error);
+            }
+        }
+
+        window.onload = function () {
+            getUserLocation().then(() => {
+                sendLocationDataToServer();
+            });
+        }
+
+        function moveToNavigation1(){
+            var longitude = document.getElementById("c2").dataset.longitude;
+            var latitude = document.getElementById("c2").dataset.latitude;
+            location.href=`navigation.html?latitude=${latitude}&longitude=${longitude}`;
+        }
+        function moveToNavigation2(){
+            var longitude = document.getElementById("d2").dataset.longitude;
+            var latitude = document.getElementById("d2").dataset.latitude;
+            location.href=`navigation.html?latitude=${latitude}&longitude=${longitude}`;
+        }
+
+        function moveToNavigation3(){
+            var longitude = document.getElementById("e2").dataset.longitude;
+            var latitude = document.getElementById("e2").dataset.latitude;
+            location.href=`navigation.html?latitude=${latitude}&longitude=${longitude}`;
+        }
+
+
+        // document.getElementById('search-form').addEventListener('submit', function (e) {
+        //     e.preventDefault(); // 기본 동작 방지 (페이지 새로고침)
+
+        //     const searchQuery = document.getElementById('search-query').value;
+
+        //     console.log(searchQuery);
+        //     // 서버에 POST 요청 보내기
+        //     fetch('/search', {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-Type': 'text',
+        //         },
+        //     })
+        //         .then(response => response)
+        //         .then(data => {
+        //             const resultsList = document.getElementById('results-list');
+        //             const noResultsMessage = document.getElementById('no-results-message');
+
+        //             // 결과 목록 초기화
+        //             if (resultsList) {
+        //                 resultsList.innerHTML = '';
+        //             }
+
+        //             if (data.results && data.results.length > 0) {
+        //                 // 검색 결과가 있을 경우, 목록에 결과 추가
+        //                 data.results.forEach(result => {
+        //                     const listItem = document.createElement('li');
+        //                     listItem.textContent = result.facility_name; // 결과 필드에 따라 수정
+        //                     if (resultsList) {
+        //                         resultsList.appendChild(listItem);
+        //                     }
+        //                 });
+
+        //                 if (noResultsMessage) {
+        //                     noResultsMessage.style.display = 'none'; // 결과 메시지 숨기기
+        //                 }
+        //             } else {
+        //                 // 검색 결과가 없을 경우 메시지 표시
+        //                 if (noResultsMessage) {
+        //                     noResultsMessage.style.display = 'block';
+        //                 }
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.error('오류 발생: ', error);
+        //         });
+        // });
+
     </script>
-        <script src="index.js"></script>
 </body>
+
 </html>
