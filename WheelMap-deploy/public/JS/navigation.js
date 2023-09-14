@@ -33,6 +33,8 @@ async function getLocation() {
   document.getElementById("name").innerHTML = facility_name;
   document.getElementById("address").innerHTML = address;
 
+  localStorage.setItem("endX", endX);
+  localStorage.setItem("endY", endY);
 }
 
 // 페이지가 로딩이 된 후 호출하는 함수입니다.
@@ -101,7 +103,6 @@ function initializeMap() {
         var geometry = resultData[i].geometry;
         var properties = resultData[i].properties;
         var polyline_;
-
 
         if (geometry.type == "LineString") {
           for (var j in geometry.coordinates) {
@@ -192,13 +193,12 @@ function initializeMap() {
     resultdrawArr.push(polyline_);
   }
 
-  //  getLocation();
 }
 
 async function initTmap() {
   try {
-    await getUserLocation();
     await getLocation();
+    await getUserLocation();
     initializeMap();
   } catch (error) {
     console.error(error);
@@ -207,4 +207,11 @@ async function initTmap() {
 function detectLocationChange({ coords, timestamp }) {
   latitude = coords.latitude;   // 위도
   longitude = coords.longitude; // 경도
+  console.log("Walk : " + latitude + longitude);
+}
+
+function moveToWalk() {
+  document.getElementById("startBtn").dataset.longitude = longitude ;
+  document.getElementById("startBtn").dataset.latitude = latitude ;
+  location.href = `walk.html?latitude=${latitude}&longitude=${longitude}`;
 }

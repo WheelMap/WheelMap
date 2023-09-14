@@ -16,7 +16,7 @@
 
     
 </head>
-<body onload="initTmap()">
+<body>
   <span class="slideshow-container">
     <div class="slide">
       <img id = "Img" src = ''>
@@ -40,11 +40,11 @@
     <div class="inner">
       <p class="dsc1">신길역</p>
       <p class="dsc2">안내를 시작하시겠습니까?</p>
-      <button type="button" class="sound" onclick="sound()">음성안내</button>
-      <button type="button" class="noSound" onclick="noSound()">지도안내</button>
+      <button type="button" id="sound" class="sound" onclick="sound()">음성안내</button>
+      <button type="button" id="nosound" class="noSound" onclick="noSound()">지도안내</button>
+
     </div>
   </div>
 
-    
 </body>
 </html>
