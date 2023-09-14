@@ -35,10 +35,7 @@
             </div>
         </div>
         <div id="map">
-
-            <body onload="initTmap()"><!-- 맵 생성 실행 -->
                 <div id="map_div" style="height: 800px;"></div>
-            </body>
         </div>
         <div id="footer">
             <div id="a2">
@@ -63,6 +60,9 @@
         initTmap();
         var latitude;
         var longitude;
+        var road_address;
+        var jibun_address;
+        var facility_name;
 
         async function getUserLocation() {
             return new Promise(function (resolve, reject) {
@@ -92,17 +92,40 @@
                 if (response.status === 200) {
                     console.log('위치 정보가 서버로 전송되었습니다.');
                     console.log('서버 응답 데이터:', response.data);
+                    //c2
+                    document.getElementById("c2").dataset.longitude = response.data[0].longitude;
+                    document.getElementById("c2").dataset.latitude = response.data[0].latitude;
+                    if (response.data[0].road_address === "") {
+                        document.getElementById("c2").dataset.address = response.data[0].jibun_address;
+                    }
+                    else {
+                        document.getElementById("c2").dataset.address = response.data[0].road_address;
+                    }
+                    document.getElementById("c2").dataset.facility_name = response.data[0].facility_name;
+                    //d2
+                    document.getElementById("d2").dataset.longitude = response.data[1].longitude;
+                    document.getElementById("d2").dataset.latitude = response.data[1].latitude;
+                    if (response.data[1].road_address === "") {
+                        document.getElementById("d2").dataset.address = response.data[1].jibun_address;
+                    }
+                    else {
+                        document.getElementById("d2").dataset.address = response.data[1].road_address;
+                    }
+                    document.getElementById("d2").dataset.facility_name = response.data[1].facility_name;
+                    //e2
+                    document.getElementById("e2").dataset.longitude = response.data[2].longitude;
+                    document.getElementById("e2").dataset.latitude = response.data[2].latitude;
+                    if (response.data[2].road_address === "") {
+                        document.getElementById("e2").dataset.address = response.data[2].jibun_address;
+                    }
+                    else {
+                        document.getElementById("e2").dataset.address = response.data[2].road_address;
+                    }
+                    document.getElementById("e2").dataset.facility_name = response.data[2].facility_name;
 
-                    document.getElementById("c2").dataset.longitude=response.data[0].longitude;
-                    document.getElementById("c2").dataset.latitude=response.data[0].latitude;
-                    document.getElementById("d2").dataset.longitude=response.data[1].longitude;
-                    document.getElementById("d2").dataset.latitude=response.data[1].latitude;
-                    document.getElementById("e2").dataset.longitude=response.data[2].longitude;
-                    document.getElementById("e2").dataset.latitude=response.data[2].latitude;
-
-                    document.getElementById("c2").innerHTML = response.data[0].facility_name + " " + Math.floor(response.data[0].distance ) + "m";
-                    document.getElementById("d2").innerHTML = response.data[1].facility_name + " " + Math.floor(response.data[1].distance )+ "m";
-                    document.getElementById("e2").innerHTML = response.data[2].facility_name + " " + Math.floor(response.data[2].distance )+ "m";
+                    document.getElementById("c2").innerHTML = response.data[0].facility_name + " " + Math.floor(response.data[0].distance) + "m";
+                    document.getElementById("d2").innerHTML = response.data[1].facility_name + " " + Math.floor(response.data[1].distance) + "m";
+                    document.getElementById("e2").innerHTML = response.data[2].facility_name + " " + Math.floor(response.data[2].distance) + "m";
                 } else {
                     console.error('위치 정보 전송 실패');
                 }
@@ -117,21 +140,27 @@
             });
         }
 
-        function moveToNavigation1(){
+        function moveToNavigation1() {
             var longitude = document.getElementById("c2").dataset.longitude;
             var latitude = document.getElementById("c2").dataset.latitude;
-            location.href=`navigation.html?latitude=${latitude}&longitude=${longitude}`;
+            var address = document.getElementById("c2").dataset.address;
+            var facility_name = document.getElementById("c2").dataset.facility_name;
+            location.href = `navigation.html?latitude=${latitude}&longitude=${longitude}&address=${address}&facility_name=${facility_name}`;
         }
-        function moveToNavigation2(){
+        function moveToNavigation2() {
             var longitude = document.getElementById("d2").dataset.longitude;
             var latitude = document.getElementById("d2").dataset.latitude;
-            location.href=`navigation.html?latitude=${latitude}&longitude=${longitude}`;
+            var address = document.getElementById("d2").dataset.address;
+            var facility_name = document.getElementById("d2").dataset.facility_name;
+            location.href = `navigation.html?latitude=${latitude}&longitude=${longitude}&address=${address}&facility_name=${facility_name}`;
         }
 
-        function moveToNavigation3(){
+        function moveToNavigation3() {
             var longitude = document.getElementById("e2").dataset.longitude;
             var latitude = document.getElementById("e2").dataset.latitude;
-            location.href=`navigation.html?latitude=${latitude}&longitude=${longitude}`;
+            var address = document.getElementById("e2").dataset.address;
+            var facility_name = document.getElementById("e2").dataset.facility_name;
+            location.href = `navigation.html?latitude=${latitude}&longitude=${longitude}&address=${address}&facility_name=${facility_name}`;
         }
 
 
