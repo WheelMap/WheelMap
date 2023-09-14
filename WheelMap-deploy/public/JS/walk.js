@@ -13,6 +13,37 @@
       const mySynth = window.speechSynthesis;
       let utterance;
 
+      function openPopup() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
+      }
+
+      function closePopup() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "none";
+        window.location.href = "index.html";
+      }
+
+      function cancelPopup() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "none";
+      }
+
+      function sound() {
+        var popup = document.getElementById("startPop");
+        popup.style.display = "none";
+        // 여기다가 음성안내 연결하면 됨
+        // 만약 페이지로 이동한다면
+        // window.location.href = "";
+        // 이렇게 쓰시면 됩니다
+      }
+
+      function noSound() {
+        var popup = document.getElementById("startPop");
+        popup.style.display = "none";
+        // 여기다가 지도안내 연결하면 됨
+      }
+
       // 페이지가 로딩이 된 후 호출하는 함수입니다.
       async function initializeMap(){
         await getUserLocation();
