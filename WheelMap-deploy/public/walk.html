@@ -27,7 +27,23 @@
     </div>
   </span>
   <div id="map"></div>
-  <button class="endBtn">안내종료</button>
+  <button id="endBtn" onclick="openPopup()">안내종료</button>
+  <div class="popup" id="popup">
+    <div class="inner">
+      <p class="dsc">안내를 종료하시겠습니까?</p>
+      <button type="button" class="yes" onclick="closePopup()">확인</button>
+      <button type="button" class="no" onclick="cancelPopup()">취소</button>
+    </div>
+  </div>
+
+  <div class="startPop" id="startPop">
+    <div class="inner">
+      <p class="dsc1">신길역</p>
+      <p class="dsc2">안내를 시작하시겠습니까?</p>
+      <button type="button" class="sound" onclick="sound()">음성안내</button>
+      <button type="button" class="noSound" onclick="noSound()">지도안내</button>
+    </div>
+  </div>
 
     
 </body>
