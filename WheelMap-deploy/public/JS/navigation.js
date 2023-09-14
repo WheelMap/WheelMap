@@ -1,3 +1,4 @@
+
 var map;
 var marker_s, marker_e, marker_p1, marker_p2;
 var totalMarkerArr = [];
@@ -7,7 +8,8 @@ var latitude;
 var longitude;
 var endX;
 var endY;
-
+var address;
+var facility_name;
 //위치 정보를 가져오는 비동기 함수
 function getUserLocation() {
   return new Promise(function (resolve, reject) {
@@ -25,6 +27,12 @@ async function getLocation() {
   const URLParams = new URL(location.href).searchParams;
   endX = URLParams.get("longitude");
   endY = URLParams.get("latitude");
+  address = URLParams.get("address");
+  facility_name = URLParams.get("facility_name");
+
+  document.getElementById("name").innerHTML = facility_name;
+  document.getElementById("address").innerHTML = address;
+
 }
 
 // 페이지가 로딩이 된 후 호출하는 함수입니다.
@@ -68,8 +76,8 @@ function initializeMap() {
     data: {
       "startX": longitude.toString(),
       "startY": latitude.toString(),
-      "endX": endX.toString(),
-      "endY": endY.toString(),
+      "endX": endX,
+      "endY": endY,
       "resCoordType": "EPSG3857",
       "startName": "출발지",
       "endName": "도착지"
@@ -77,6 +85,7 @@ function initializeMap() {
     success: function (response) {
       var resultData = response.features;
 
+      document.getElementById("time").innerHTML = ((resultData[0].properties.totalTime) / 60).toFixed(0) + "분 소요";
       //기존 그려진 라인 & 마커가 있다면 초기화
       if (resultdrawArr.length > 0) {
         for (var i in resultdrawArr) {
