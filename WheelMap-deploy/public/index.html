@@ -135,54 +135,6 @@
         }
 
 
-        // document.getElementById('search-form').addEventListener('submit', function (e) {
-        //     e.preventDefault(); // 기본 동작 방지 (페이지 새로고침)
-
-        //     const searchQuery = document.getElementById('search-query').value;
-
-        //     console.log(searchQuery);
-        //     // 서버에 POST 요청 보내기
-        //     fetch('/search', {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'text',
-        //         },
-        //     })
-        //         .then(response => response)
-        //         .then(data => {
-        //             const resultsList = document.getElementById('results-list');
-        //             const noResultsMessage = document.getElementById('no-results-message');
-
-        //             // 결과 목록 초기화
-        //             if (resultsList) {
-        //                 resultsList.innerHTML = '';
-        //             }
-
-        //             if (data.results && data.results.length > 0) {
-        //                 // 검색 결과가 있을 경우, 목록에 결과 추가
-        //                 data.results.forEach(result => {
-        //                     const listItem = document.createElement('li');
-        //                     listItem.textContent = result.facility_name; // 결과 필드에 따라 수정
-        //                     if (resultsList) {
-        //                         resultsList.appendChild(listItem);
-        //                     }
-        //                 });
-
-        //                 if (noResultsMessage) {
-        //                     noResultsMessage.style.display = 'none'; // 결과 메시지 숨기기
-        //                 }
-        //             } else {
-        //                 // 검색 결과가 없을 경우 메시지 표시
-        //                 if (noResultsMessage) {
-        //                     noResultsMessage.style.display = 'block';
-        //                 }
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('오류 발생: ', error);
-        //         });
-        // });
-
     </script>
 </body>
 
