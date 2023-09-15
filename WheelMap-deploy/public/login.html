@@ -18,7 +18,7 @@
         <img src="./image/logo.png" class="icon">
         <p class="title">제 2의 발, 휠맵</p>
         <p class="subText">휠체어 충전소 위치를 쉽고 빠르게!</p>
-        <button class="btn btnkakao" onclick="moveKakaoLogin()">
+        <button class="btn btnkakao" onclick="sendKakaoIdToServer()">
             <img src="./image/kakao.png" alt="kakao_logo" class="kakao_icon">
             카카오계정으로 로그인
         </button>
@@ -28,12 +28,112 @@
         const JAVASCRIPT_KEY = "5c4cb8cd9ce086f65a090e7fae1fc77d";
         const kakaoLoginUrl = "https://kauth.kakao.com/oauth/authorize";
         const kakaoTokenApiUrl = "https://kauth.kakao.com/oauth/token"; 
-        const redirectUrl = "https://stac-wheel-map.web.app/join.html";
+        const redirectUrl = "http://127.0.0.1:5500/WheelMap-deploy/public/join.html";
+
 
         // 3-2. 카카오 로그인 창으로 이동
         function moveKakaoLogin() {
             location.href = `${kakaoLoginUrl}?client_id=${REST_API_KEY}&redirect_uri=${redirectUrl}&response_type=code`;
+            login();
         }
+
+        function login() {
+            Kakao.Auth.login({
+                success: function(authObj) {
+                const kakaoId = authObj.id; // Kakao ID를 가져옵니다.
+                console.log("Kakao ID:", kakaoId);
+
+                // Kakao ID를 서버로 전송합니다.
+                sendKakaoIdToServer(kakaoId);
+                },
+                fail: function(err) {
+                console.error('Kakao 로그인 실패:', err);
+                }
+            });
+            }
+
+            // Kakao ID를 서버로 전송하는 함수
+            function sendKakaoIdToServer(kakaoId) {
+            // 서버 URL 설정
+            const serverURL = '/login'; // 서버의 로그인 API 엔드포인트 URL
+
+            // 서버로 전송할 데이터 설정
+            const data = {
+                kakao_id: kakaoId
+            };
+
+            // 서버로 데이터를 전송
+            fetch(serverURL, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                if (response.status === 200) {
+                    // 로그인 성공
+                    console.log('로그인 성공');
+                } else {
+                    // 로그인 실패 또는 다른 상태 코드 처리
+                    console.log('로그인 실패');
+                }
+                })
+                .catch(error => {
+                // 에러 처리
+                console.error('KakaoID 전송 중 에러 발생:', error);
+                });
+            }
+
+        // function moveKakaoLogin() {
+        //     Kakao.Auth.login({
+        //         success: function(authObj) {
+        //         const kakaoId = authObj.id; // Kakao ID를 가져옵니다.
+        //         console.log("Kakao ID:", kakaoId);
+
+        //         // 이제 kakaoId 변수에 사용자의 Kakao ID가 저장되었습니다.
+        //         // 필요한 경우 이 값을 다른 곳에서 사용할 수 있습니다.
+        //         },
+        //         fail: function(err) {
+        //         console.error('Kakao 로그인 실패:', err);
+        //         }
+        //     });
+        //     console.log("Kakao ID:", kakaoId);
+        // }
+        // async function moveKakaoLogin(token) {
+        //     const reqURL = "https://kapi.kakao.com/v2/user/me";
+
+        //     try {
+        //         const response = await fetch(reqURL, {
+        //         method: "POST",
+        //         headers: {
+        //             "Authorization": `Bearer ${token}`, // access_token을 헤더에 추가
+        //         },
+        //         });
+
+        //         // 응답 코드가 200인 경우 성공
+        //         if (response.status === 200) {
+        //         const userData = await response.json();
+
+        //         const id = userData.id;
+        //         const kakaoAccount = userData.kakao_account;
+        //         const hasEmail = kakaoAccount.has_email;
+        //         let email = "";
+
+        //         if (hasEmail) {
+        //             email = kakaoAccount.email;
+        //         }
+
+        //         console.log("id:", id);
+        //         console.log("email:", email);
+        //         } else {
+        //         console.error("사용자 정보를 가져오는 데 실패했습니다.");
+        //         }
+        //     } catch (error) {
+        //         console.error("API 요청 중 오류 발생:", error);
+        //     }
+        //     }
+        
 
         function getKakaoToken(code) {
             let token = "";
@@ -54,7 +154,10 @@
                 console.log(token);
                 }
             }); 
-    }
+        }
+
+
+
     </script>
 </body>
 </html>
