@@ -83,13 +83,18 @@
                 const { latitude, longitude } = await getUserLocation();
                 console.log(latitude);
                 console.log(longitude);
-
                 // 위도와 경도를 서버로 전송
                 const response = await axios.get(`http://localhost:3000/sendLocation?latitude=${latitude}&longitude=${longitude}`);
 
                 if (response.status === 200) {
                     console.log('위치 정보가 서버로 전송되었습니다.');
                     console.log('서버 응답 데이터:', response.data);
+                    localStorage.setItem("facility_name1", response.data[0].facility_name);
+                    localStorage.setItem("facility_name2", response.data[1].facility_name);
+                    localStorage.setItem("facility_name3", response.data[2].facility_name);
+                    localStorage.setItem("facility_name4", response.data[3].facility_name);
+                    localStorage.setItem("facility_name5", response.data[4].facility_name);
+
                     //c2
                     document.getElementById("c2").dataset.longitude = response.data[0].longitude;
                     document.getElementById("c2").dataset.latitude = response.data[0].latitude;
