@@ -14,6 +14,8 @@ let utterance;
 var soundFlag;
 let endX;
 let endY;
+let meter;
+let subText;
 
 function openPopup() {
   var popup = document.getElementById("popup");
@@ -88,10 +90,9 @@ function updateMapCenter({ coords, timestamp }) {
       imgElement.src = "image/straightArrow.png";
       console.log("직진");
     }
-    let meter = infoData[cnt - 1].description.match(reg)[0];
-    let subText = textDescription;
-    if (soundFlag === "Sound")
-      textSpeach(meter, subText);
+    meter = infoData[cnt - 1].description.match(reg)[0];
+    subText = textDescription;
+
   }
 
   console.log(point.flatCoordinates);
@@ -101,8 +102,6 @@ function updateMapCenter({ coords, timestamp }) {
 
 async function initTmap() {
   try {
-    var popup = document.getElementById("startPop");
-    popup.style.display = "none";
     await getUserLocation();
     initializeMap();
   } catch (error) {
@@ -259,7 +258,8 @@ function initializeMap() {
 
       document.getElementById("meter").innerHTML = navigation[cnt].description.match(reg)[0];
       document.getElementById("subText").innerHTML = textDescription;
-
+      meter =  navigation[cnt].description.match(reg)[0];
+      subText = textDescription;
       if (textDescription.includes("좌회전")) {
         var imgElement = document.getElementById("Img");
         imgElement.src = "image/rightArrow.png"
@@ -274,6 +274,10 @@ function initializeMap() {
         var imgElement = document.getElementById("Img");
         imgElement.src = "image/straightArrow.png";
         console.log("직진");
+      }
+
+      if (soundFlag == "Sound"){
+        textSpeach(meter, subText);
       }
       navigator.geolocation.watchPosition(updateMapCenter);
     },
