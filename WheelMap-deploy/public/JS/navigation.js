@@ -35,6 +35,7 @@ async function getLocation() {
 
   localStorage.setItem("endX", endX);
   localStorage.setItem("endY", endY);
+  localStorage.setItem("facility_name", facility_name);
 }
 
 // 페이지가 로딩이 된 후 호출하는 함수입니다.
