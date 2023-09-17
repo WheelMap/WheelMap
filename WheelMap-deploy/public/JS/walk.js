@@ -92,6 +92,7 @@ function updateMapCenter({ coords, timestamp }) {
     }
     meter = infoData[cnt - 1].description.match(reg)[0];
     subText = textDescription;
+    textSpeach(meter, subText);
 
   }
 
@@ -274,10 +275,6 @@ function initializeMap() {
         var imgElement = document.getElementById("Img");
         imgElement.src = "image/straightArrow.png";
         console.log("직진");
-      }
-
-      if (soundFlag == "Sound"){
-        textSpeach(meter, subText);
       }
       navigator.geolocation.watchPosition(updateMapCenter);
     },
