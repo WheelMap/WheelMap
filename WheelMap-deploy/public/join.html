@@ -74,28 +74,53 @@
                 console.log(token);
                 }
             }); 
-        return token;
-    }
+            return token;
+        }
 
         function getKakaoUserInfo(token) {
             $.ajax(kakaoUserApiUrl, {
-                    headers: {
-                    'Authorization': `Bearer ${token}`,
-                    },
-                    contentType: "application/x-www-form-urlencoded;charset=utf-8",
-                    dataType: "json",
-                    data: JSON.stringify({}),
-                    method: "POST",
-                    async: false,
-                    success: function (resultData) {
-                    console.log(resultData);
-                    console.log();
-                    $("#profile").attr("src", resultData.properties.profile_image);
-                    $("#name").val(resultData.properties.nickname);
-                    $("#email").val(resultData.kakao_account.email);
-                }});
+                headers: {
+                'Authorization': `Bearer ${token}`,
+                },
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({}),
+                method: "POST",
+                async: false,
+                success: function (resultData) {
+                    console.log(resultData.id);
+                    // resultData.id로 가입한 유저인지 판별 후 가입한 유저면 index 아니면 냅두기
+                    // a.jax에서 세연이가 만든 api 호출하기 (함수로 따로 빼서 호출)
+                console.log(resultData);
+                console.log();
+                $("#profile").attr("src", resultData.properties.profile_image);
+                $("#name").val(resultData.properties.nickname);
+                $("#email").val(resultData.kakao_account.email);
+                getKakaoApi(token, resultData.id);
+            }});
         }
-      
+
+        function getKakaoApi(token, kakaoId) {
+            $.ajax("/login", {
+                headers: {
+                'Authorization': `Bearer ${token}`,
+                },
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                dataType: "json",
+                data: kakaoId,
+                method: "POST",
+                async: false,
+                success: function (response) {
+                    if (response.status === 200) {
+                        window.location.href = "index.html";
+                    } else {
+                        window.location.href = "join.html";
+                    }
+                }
+                ,err: function () {
+                    window.location.href = "join.html";
+            }});
+        }
        
         const profileImg = document.getElementById("profile");
         const userName = document.getElementById("name");
