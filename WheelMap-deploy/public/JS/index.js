@@ -2,6 +2,30 @@ var map;
 var latitude;
 var longitude;
 
+let menuOpen = false;
+
+        function toggleMenu() {
+            const menubox1 = document.getElementById('menubox1');
+            const menubox2 = document.getElementById('menubox2');
+
+            if (menuOpen) {
+                menubox1.style.left = '-100%';
+                menubox2.style.right = '-100%';
+                menuOpen = false;
+            } else {
+                menubox1.style.left = '0';
+                menubox2.style.right = '0';
+                menuOpen = true;
+            }
+        }
+
+        function toggleMenuIcon(element) {
+            const navToggle = element;
+            const icon = navToggle.querySelector('i');
+            if (menuOpen) icon.classList.add('bx-x');
+            else icon.classList.remove('bx-x');
+        }
+
 // 위치 정보를 가져오는 비동기 함수
 function getUserLocation() {
     return new Promise(function (resolve, reject) {

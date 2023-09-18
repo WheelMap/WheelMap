@@ -137,28 +137,29 @@
                 <div class="clear"></div>
                 <div id="side-menu">
                     <div class="side-menu">
-                        <i class="fas fa-star" style="font-size: 1rem; color: #FFC700; margin-right: 5px;"></i>
-                        찜한 충전소
+                        <b>찜한 충전소</b>
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px;"
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;"
                             onclick="window.location.href='like.html'"></i>
                     </div>
                     <div class="side-menu">
                         이용약관
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px;"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
                     </div>
                     <div class="side-menu">
                         버전
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px;"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
                     </div>
                     <div class="side-menu">
                         문의하기
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px;"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
                     </div>
                 </div>
+                <div class="clear"></div>
+                <a href="./index.html">홈으로 가기</a>
             </div>
             <div id="menubox2"></div>
         </div>
@@ -275,53 +276,53 @@
             }
 
             function toggleBackgroundColorAndHiddenBox(element) {
-                const itemContainer = element;
-                const hiddenBox = itemContainer.querySelector('.hidden-box');
+            const itemContainer = element;
+            const hiddenBox = itemContainer.querySelector('.hidden-box');
 
-                if (backgroundColor) {
-                    itemContainer.style.backgroundColor = '#FFE999';
-                    backgroundColor = false;
-                } else {
-                    itemContainer.style.backgroundColor = '';
-                    backgroundColor = true;
-                }
-
-                // 아래의 부분을 추가하여 hidden-box를 클릭한 item-container의 아래에 표시합니다.
+            if (hiddenBox.style.display === 'none' || hiddenBox.style.display === '') {
+                // hidden-box가 숨겨져 있을 때 처리
+                itemContainer.style.backgroundColor = '#FFE999';
+                hiddenBox.style.display = 'block';
+                // 아래 아이템 컨테이너에 193px 여백 주기
                 const nextItemContainer = itemContainer.nextElementSibling;
                 if (nextItemContainer && nextItemContainer.classList.contains('item-container')) {
-                    const itemContainerRect = itemContainer.getBoundingClientRect();
-                    const nextItemContainerRect = nextItemContainer.getBoundingClientRect();
-                    const yOffset = nextItemContainerRect.top - itemContainerRect.bottom + 60;
-                    hiddenBox.style.top = `${yOffset}px`;
+                    nextItemContainer.style.marginTop = '193px';
                 }
-
-                if (hiddenBox.style.display === 'none') hiddenBox.style.display = 'block';
-                else hiddenBox.style.display = 'none';
-            }
-
-            let menuOpen = false;
-
-            function toggleMenu() {
-                const menubox1 = document.getElementById('menubox1');
-                const menubox2 = document.getElementById('menubox2');
-
-                if (menuOpen) {
-                    menubox1.style.left = '-100%';
-                    menubox2.style.right = '-100%';
-                    menuOpen = false;
-                } else {
-                    menubox1.style.left = '0';
-                    menubox2.style.right = '0';
-                    menuOpen = true;
+            } else {
+                // hidden-box가 보이고 있을 때 처리
+                itemContainer.style.backgroundColor = ''; // 배경색 초기화
+                hiddenBox.style.display = 'none'; // hidden-box 숨기기
+                // 아래 아이템 컨테이너의 여백 초기화
+                const nextItemContainer = itemContainer.nextElementSibling;
+                if (nextItemContainer && nextItemContainer.classList.contains('item-container')) {
+                    nextItemContainer.style.marginTop = '0';
                 }
             }
+        }
 
-            function toggleMenuIcon(element) {
-                const navToggle = element;
-                const icon = navToggle.querySelector('i');
-                if (menuOpen) icon.classList.add('bx-x');
-                else icon.classList.remove('bx-x');
+        let menuOpen = false;
+
+        function toggleMenu() {
+            const menubox1 = document.getElementById('menubox1');
+            const menubox2 = document.getElementById('menubox2');
+
+            if (menuOpen) {
+                menubox1.style.left = '-100%';
+                menubox2.style.right = '-100%';
+                menuOpen = false;
+            } else {
+                menubox1.style.left = '0';
+                menubox2.style.right = '0';
+                menuOpen = true;
             }
+        }
+
+        function toggleMenuIcon(element) {
+            const navToggle = element;
+            const icon = navToggle.querySelector('i');
+            if (menuOpen) icon.classList.add('bx-x');
+            else icon.classList.remove('bx-x');
+        }
         </script>
 </body>
 

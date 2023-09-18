@@ -10,22 +10,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div id="box">
-        <div class="nav container">
-            <div class="flex">
-                <i class="fas fa-star" style="font-size: 1.5rem; color: #FFC700;"  onclick="window.location.href='searchresult.html'"></i>
-                <div class="title">
-                    <i class="fas fa-star" style="font-size: 1.5rem; color: #FFC700;"></i>
-                    <div class="container">
-                        <h1>찜한 장소</h1>
-                        <div id="likedPlacesList">
-                            <!-- 찜한 장소 목록을 여기에 표시합니다. -->
-                        </div>
-                    </div>
-                </div>
+
+
+<div id="box">
+    <div class="nav container">
+        <div class="flex">
+            <i class="fas fa-chevron-left" style="font-size: 1.5rem; color:gray;" onclick="window.location.href='index.html'"></i>
+            <div class="title">
+                <i class="fas fa-star" style="font-size: 1.5rem; color: #FFC700;"></i>
+                <span><b style="font-size: 22px;">찜한 충전소</b></span>
             </div>
         </div>
     </div>
+</div>
+
+</body>
+
     <script>
         // 찜한 장소 목록을 가져와서 표시하는 함수
         function fetchLikedPlaces() {
