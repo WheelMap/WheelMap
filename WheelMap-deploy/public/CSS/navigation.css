@@ -38,33 +38,6 @@ input{
 .map_div{
     top: -100px;
 }
-.buttonAll{
-    position: absolute;
-    width: 92% !important;
-    margin: 0% 0% 4% 0%;
-    padding: 3.5% 4% 0% 4%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    column-gap: 3%;
-    overflow-x: auto;
-    /* width: auto; */
-}
-.button {
-    flex: 0 0 32%;
-    display: flex;
-    column-gap: 5%;
-    padding: 1.6% 3% 1.6% 3%;
-    font-size: 1.3rem;
-    font-weight: 500;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 50px;
-    border: none;
-    z-index: 999 !important;
-}
 
 .button:hover{
     background-color: #ebebeb;
@@ -146,6 +119,7 @@ hr{
 
 }
 .startBtn{
+    position: inherit;
     font-size: 1.3rem;
     /* font-weight: bold; */
     color: white;
@@ -153,5 +127,6 @@ hr{
     border: 0;
     border-radius: 30px;
     padding: 3% 10% 3% 10%;
-    margin-left: 57%;
+    right: 20px;
+    bottom: 20px;
 }
