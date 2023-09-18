@@ -18,10 +18,10 @@
     <!-- 바 -->
     <div class="nav container">
         <div class="flex">
-            <div class="nav-toggle" id="nav_toggle">
+            <div class="nav-toggle" id="nav_toggle" onclick="toggleMenu(); toggleMenuIcon(this);">
                 <i class='bx bx-menu' style="font-size: 1.5rem;"></i>
             </div>
-            <input type="text" placeholder="장소를 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='장소를 입력하세요'" >
+            <input type="text" placeholder="장소를 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='장소를 입력하세요'" onclick="window.location.href='searchmenu.html'" >
         </div>
         <div>
             <i class='bx bx-search' style="font-size: 1.5rem;"></i>
