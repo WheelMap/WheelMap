@@ -28,14 +28,14 @@ i{
     background-color: white;
     justify-content: space-between;
     align-items: center;
-    padding: 3% 2% 3% 2%;
+    padding: 3% 2% 3% 4%;
 }
 form{
     display: flex;
     width: 88vw;
 }
 input{
-    width: 100%;
+    width: 90%;
 }
 button{
     border: none;

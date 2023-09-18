@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="CSS/searchmenu.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="CSS/all.css">
 </head>
 
 <body>
@@ -17,13 +18,12 @@
         <div class="nav container">
             <div class="flex">
                 <div class="nav-toggle" id="nav_toggle" onclick="toggleMenu(); toggleMenuIcon(this);">
-                    <i class='bx bx-menu'></i>
+                    <i class='bx bx-menu' style="font-size: 1.5rem;"></i>
                 </div>
-                <input type="text" placeholder="장소를 입력하세요" onfocus="this.placeholder=''"
-                    onblur="this.placeholder='장소를 입력하세요'">
-            </div>
-            <div>
-                <i class='bx bx-search' style="font-size: 1.5rem;"></i>
+                <form id="search-form">
+                    <input type="text" id="search-query" placeholder="장소를 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='장소를 입력하세요'">
+                    <button type="submit"><i class='bx bx-search' style="font-size: 1.5rem;" onclick='search()'></i></button>
+                </form>
             </div>
         </div>
 
@@ -145,17 +145,20 @@
                     <div class="side-menu">
                         이용약관
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;"
+                            onclick="window.location.href='test.html'"></i>
                     </div>
                     <div class="side-menu">
                         버전
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;"
+                            onclick="window.location.href='test.html'"></i>
                     </div>
                     <div class="side-menu">
                         문의하기
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;"
+                            onclick="window.location.href='test.html'"></i>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -165,17 +168,17 @@
         </div>
 
         <script>
-            document.getElementById("place1").innerHTML=localStorage.getItem("facility_name1");
-            document.getElementById("place2").innerHTML=localStorage.getItem("facility_name2");
-            document.getElementById("place3").innerHTML=localStorage.getItem("facility_name3");
-            document.getElementById("place4").innerHTML=localStorage.getItem("facility_name4");
-            document.getElementById("place5").innerHTML=localStorage.getItem("facility_name5");
+            document.getElementById("place1").innerHTML = localStorage.getItem("facility_name1");
+            document.getElementById("place2").innerHTML = localStorage.getItem("facility_name2");
+            document.getElementById("place3").innerHTML = localStorage.getItem("facility_name3");
+            document.getElementById("place4").innerHTML = localStorage.getItem("facility_name4");
+            document.getElementById("place5").innerHTML = localStorage.getItem("facility_name5");
 
             // 검색 기능을 호출하는 함수
             function search() {
                 // 검색어 가져오기
                 const searchTerm = document.getElementById('searchInput').value;
-
+                console.log(searchTerm);
                 // 서버에 POST 요청 보내기
                 fetch('http://localhost:3000/search', {
                     method: 'POST',
@@ -276,53 +279,53 @@
             }
 
             function toggleBackgroundColorAndHiddenBox(element) {
-            const itemContainer = element;
-            const hiddenBox = itemContainer.querySelector('.hidden-box');
+                const itemContainer = element;
+                const hiddenBox = itemContainer.querySelector('.hidden-box');
 
-            if (hiddenBox.style.display === 'none' || hiddenBox.style.display === '') {
-                // hidden-box가 숨겨져 있을 때 처리
-                itemContainer.style.backgroundColor = '#FFE999';
-                hiddenBox.style.display = 'block';
-                // 아래 아이템 컨테이너에 193px 여백 주기
-                const nextItemContainer = itemContainer.nextElementSibling;
-                if (nextItemContainer && nextItemContainer.classList.contains('item-container')) {
-                    nextItemContainer.style.marginTop = '193px';
-                }
-            } else {
-                // hidden-box가 보이고 있을 때 처리
-                itemContainer.style.backgroundColor = ''; // 배경색 초기화
-                hiddenBox.style.display = 'none'; // hidden-box 숨기기
-                // 아래 아이템 컨테이너의 여백 초기화
-                const nextItemContainer = itemContainer.nextElementSibling;
-                if (nextItemContainer && nextItemContainer.classList.contains('item-container')) {
-                    nextItemContainer.style.marginTop = '0';
+                if (hiddenBox.style.display === 'none' || hiddenBox.style.display === '') {
+                    // hidden-box가 숨겨져 있을 때 처리
+                    itemContainer.style.backgroundColor = '#FFE999';
+                    hiddenBox.style.display = 'block';
+                    // 아래 아이템 컨테이너에 193px 여백 주기
+                    const nextItemContainer = itemContainer.nextElementSibling;
+                    if (nextItemContainer && nextItemContainer.classList.contains('item-container')) {
+                        nextItemContainer.style.marginTop = '193px';
+                    }
+                } else {
+                    // hidden-box가 보이고 있을 때 처리
+                    itemContainer.style.backgroundColor = ''; // 배경색 초기화
+                    hiddenBox.style.display = 'none'; // hidden-box 숨기기
+                    // 아래 아이템 컨테이너의 여백 초기화
+                    const nextItemContainer = itemContainer.nextElementSibling;
+                    if (nextItemContainer && nextItemContainer.classList.contains('item-container')) {
+                        nextItemContainer.style.marginTop = '0';
+                    }
                 }
             }
-        }
 
-        let menuOpen = false;
+            let menuOpen = false;
 
-        function toggleMenu() {
-            const menubox1 = document.getElementById('menubox1');
-            const menubox2 = document.getElementById('menubox2');
+            function toggleMenu() {
+                const menubox1 = document.getElementById('menubox1');
+                const menubox2 = document.getElementById('menubox2');
 
-            if (menuOpen) {
-                menubox1.style.left = '-100%';
-                menubox2.style.right = '-100%';
-                menuOpen = false;
-            } else {
-                menubox1.style.left = '0';
-                menubox2.style.right = '0';
-                menuOpen = true;
+                if (menuOpen) {
+                    menubox1.style.left = '-100%';
+                    menubox2.style.right = '-100%';
+                    menuOpen = false;
+                } else {
+                    menubox1.style.left = '0';
+                    menubox2.style.right = '0';
+                    menuOpen = true;
+                }
             }
-        }
 
-        function toggleMenuIcon(element) {
-            const navToggle = element;
-            const icon = navToggle.querySelector('i');
-            if (menuOpen) icon.classList.add('bx-x');
-            else icon.classList.remove('bx-x');
-        }
+            function toggleMenuIcon(element) {
+                const navToggle = element;
+                const icon = navToggle.querySelector('i');
+                if (menuOpen) icon.classList.add('bx-x');
+                else icon.classList.remove('bx-x');
+            }
         </script>
 </body>
 

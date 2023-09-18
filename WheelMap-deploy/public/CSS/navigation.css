@@ -24,11 +24,27 @@ i{
     background-color: white;
     justify-content: space-between;
     align-items: center;
-    padding: 3% 2% 3% 2%;
+    padding: 3% 2% 3% 4%;
 }
+form{
+    display: flex;
+    width: 88vw;
+}
+input{
+    width: 90%;
+}
+button{
+    border: none;
+    background-color: white;
+}
+
 .flex{
     display: flex;
     column-gap: 5%;
+}
+.flex > *{
+    z-index: 1;
+
 }
 input{
     border: 0px;
@@ -150,13 +166,13 @@ hr{
 }
 
 #menubox2 {
-    width: 30%;
+    width: 100%;
     background-color: black;
     opacity: 0.5;
     height: 100%;
     position: fixed;
     top: 0;
-    z-index: 3;
+    z-index: 1;
     right: -100%;
 }
 
