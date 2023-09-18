@@ -216,3 +216,27 @@ function moveToWalk() {
   document.getElementById("startBtn").dataset.latitude = latitude ;
   location.href = `walk.html?latitude=${latitude}&longitude=${longitude}`;
 }
+
+let menuOpen = false;
+
+        function toggleMenu() {
+            const menubox1 = document.getElementById('menubox1');
+            const menubox2 = document.getElementById('menubox2');
+
+            if (menuOpen) {
+                menubox1.style.left = '-100%';
+                menubox2.style.right = '-100%';
+                menuOpen = false;
+            } else {
+                menubox1.style.left = '0';
+                menubox2.style.right = '0';
+                menuOpen = true;
+            }
+        }
+
+        function toggleMenuIcon(element) {
+            const navToggle = element;
+            const icon = navToggle.querySelector('i');
+            if (menuOpen) icon.classList.add('bx-x');
+            else icon.classList.remove('bx-x');
+        }

@@ -43,7 +43,7 @@
         const kakaoTokenApiUrl = "https://kauth.kakao.com/oauth/token";
         const kakaoUserApiUrl = "https://kapi.kakao.com/v2/user/me";
         const REST_API_KEY = "0fd52107db31ebeea09da3c053348a13";
-        const redirectUrl = "https://stac-wheel-map.web.app/join.html";
+        const redirectUrl = "http://127.0.0.1:5500/WheelMap-deploy/public/join.html";
         const urlParams = new URL(location.href).searchParams;
         const code = urlParams.get('code');
         console.log(code)
@@ -93,7 +93,11 @@
                     // a.jax에서 세연이가 만든 api 호출하기 (함수로 따로 빼서 호출)
                 console.log(resultData);
                 console.log();
-                $("#profile").attr("src", resultData.properties.profile_image);
+                
+                console.log("이미지 주소 : " + resultData.properties.profile_image);
+                // // const newProfileImageUrl = resultData.properties.profile_image.replace("http://", "https://");
+                // // console.log(newProfileImageUrl);
+                // $("#profile").attr("src", resultData.properties.profile_image);
                 $("#name").val(resultData.properties.nickname);
                 $("#email").val(resultData.kakao_account.email);
                 getKakaoApi(token, resultData.id);
