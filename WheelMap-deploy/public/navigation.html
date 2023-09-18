@@ -33,18 +33,15 @@
             <!-- <i class='bx bx-minus'></i> -->
             <hr>
             <div class="flex2">
-                <div class="name">신길역</div>
-                <div class="time">5분 소요</div>
+                <div id="name" class="name"></div>
+                <div id="time" class="time"></div>
             </div>
-            <div class="address">
-                신길역 230m<br>
-                서울특별시 영등포구 신길동 41-1
+            <div id="address" class="address">
             </div>
-            <button class="startBtn" onclick="location.href='walk.html'" style="margin-top: 5%; display: flex; justify-content: center;">안내하기</button>
+
+            <button id="startBtn" class="startBtn" onclick="moveToWalk()" style="margin-top: 5%; display: flex; justify-content: center;">안내하기</button>
         </div>
         <div id="map_div"></div>
-
     </div>
-
 </body>
 </html>

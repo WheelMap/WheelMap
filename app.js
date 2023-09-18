@@ -1,8 +1,4 @@
-const express = require('express');
 const mysql = require('mysql2');
-const app = express();
-const port = 5500; // 포트 번호를 필요에 따라 수정
-app.use(express.static('public'));
 
 const db = mysql.createConnection({
   host: 'localhost',
@@ -10,55 +6,68 @@ const db = mysql.createConnection({
   password: '0000',
   database: 'wm'
 });
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const port = 3000;
 
-// MySQL 연결 확인
+app.use(express.json());
+
+app.get('/search', (req, res) => {
+  const searchQuery = req.query.searchQuery;
+  res.json({ result: searchQuery });
+});
+
+
+
 db.connect((err) => {
   if (err) {
     console.error('MySQL 연결 오류:', err);
     throw err;
   }
   console.log('MySQL 데이터베이스에 연결되었습니다.');
-});
 
-// user_info 테이블 생성
-db.query(`
-  CREATE TABLE IF NOT EXISTS user_info (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    profile_picture_url VARCHAR(255)
-  )
-`, (err, result) => {
-  if (err) {
-    console.error('테이블 생성 중 오류 발생:', err);
-    db.end(); // 에러 발생 시 연결 종료
-    throw err;
-  }
-  console.log('user_info 테이블이 생성되었습니다.');
-});
-
-// Express 미들웨어 및 설정 코드...
-
-// 검색 경로 설정
-app.get('/search', (req, res) => {
-  const searchQuery = req.query.name; // 'name' 파라미터에서 검색어 읽기
-
-  // 데이터베이스에서 검색
-  db.query('SELECT * FROM wm WHERE name LIKE ?', [`%${searchQuery}%`], (err, results) => {
+  db.query(`
+    CREATE TABLE IF NOT EXISTS user_info (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      profile_picture_url VARCHAR(255)
+    )
+  `, (err, result) => {
     if (err) {
-      console.error('데이터베이스에서 검색 중 오류 발생:', err);
-      res.status(500).json({ error: '검색 중 오류 발생' });
+      console.error('테이블 생성 중 오류 발생:', err);
+      db.end(); // 에러 발생 시 연결 종료
       return;
-    } 
+    }
+    console.log('user_info 테이블이 생성되었습니다.');
 
-    // 검색 결과를 클라이언트에 응답으로 반환
-    res.json({ results });
+    const userInfo = {
+      name: '카카오톡에서 받은 이름',
+      email: '카카오톡에서 받은 이메일',
+      profile_picture_url: '프로필 사진 링크 URL'
+    };
+    app.get('/search/:name',function(request, response){   
+      //var body = request.body;
+  
+      
+      console.log(request.params.name);
+       //input으로 받은 menu 값 출력 확인
+   });
+    db.query('INSERT INTO user_info SET ?', userInfo, (err, result) => {
+      if (err) {
+        console.error('데이터 저장 중 오류 발생:', err);
+        db.end(); // 에러 발생 시 연결 종료
+        return;
+      }
+      console.log('데이터가 성공적으로 저장되었습니다.');
+
+      db.end((err) => {
+        if (err) {
+          console.error('MySQL 연결 종료 오류:', err);
+        }
+        console.log('MySQL 데이터베이스 연결이 종료되었습니다.');
+      });
+    });
   });
-});
-
-// 다른 라우트 및 설정 코드...
-
-// 서버 시작
-app.listen(port, () => {
-  console.log(`서버가 포트 ${port}에서 실행 중입니다.`);
 });
