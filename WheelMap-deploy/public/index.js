@@ -24,15 +24,24 @@ db.connect((err) => {
 app.get('/sendLocation', async (req, res) => {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
-
     const sql = `
-    SELECT facility_name, latitude, longitude, ST_Distance_Sphere(Point(?, ?), Point(charge.longitude, charge.latitude)) AS distance
+    SELECT 
+    facility_name, 
+    latitude, 
+    longitude, 
+    road_address, 
+    jibun_address, 
+    ST_Distance_Sphere(
+        POINT(?, ?), 
+        POINT(charge.longitude, charge.latitude)  
+    ) AS distance
     FROM charge
     ORDER BY distance
     LIMIT 5;
+
     `;
 
-    db.query(sql, [longitude, latitude], (err, results) => {
+    db.query(sql, [ longitude, latitude], (err, results) => {
         if (err) {
             console.log('쿼리 실행 오류', err);
             res.status(500).send('서버 오류');
