@@ -43,20 +43,26 @@
                 <i class='bx bxs-battery-charging'></i>
                 <span id="footer_text">가까운 충전소</span>
             </div>
-            <div id="c2" class="spotbox" onclick="moveToNavigation1()">
+            <div class="scroll">
+                <div class="btnClass">
+                    <div id="c2" class="spotbox" onclick="moveToNavigation1()">
+                    </div>
+                    <div id="d2" class="spotbox" onclick="moveToNavigation2()">
+                    </div>
+                    <div id="e2" class="spotbox" onclick="moveToNavigation3()">
+                    </div>
+                    <div id="div-container">
+                        <div class="hidden spotbox">첫 번째 div</div>
+                        <div class="hidden spotbox">두 번째 div</div>
+                    </div>
+                </div>
             </div>
-            <div id="d2" class="spotbox" onclick="moveToNavigation2()">
-            </div>
-            <div id="e2" class="spotbox" onclick="moveToNavigation3()">
-            </div>
+            
             <button class="more" id="load-more-button">
                 <hr>
                 더보기
             </button>
-            <div id="div-container">
-                <div class="hidden">첫 번째 div</div>
-                <div class="hidden">두 번째 div</div>
-            </div>
+            
         </div>
         <div id="menu">
             <div id="menubox1">
@@ -102,20 +108,34 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             const loadMoreButton = document.getElementById("load-more-button");
-            const divContainer = document.getElementById("div-container");
+            const divContainer = document.querySelector(".scroll");
             const initialDivs = divContainer.querySelectorAll(".hidden");
+            let buttonClicked = false;
 
-            // 더보기 버튼 클릭 시, 숨겨진 div를 보이도록 토글합니다.
+            // 더보기 버튼 클릭 시, 숨겨진 div를 보이도록 토글하고 스크롤을 활성화합니다.
             loadMoreButton.addEventListener("click", function () {
-                initialDivs.forEach(function (div) {
-                    div.style.display = "block"; // 보이게 설정
-                    div.classList.remove("hidden"); // 숨김 클래스 제거
-                });
+                if (!buttonClicked) {
+                    initialDivs.forEach(function (div) {
+                        div.style.display = "block";  
+                        div.style.display = "flex";    
+                        div.style.height = "55px";
+                        div.style.fontSize = "1.2rem";
+                        div.style.alignItems = "center";
+                        div.classList.remove("hidden");
+                    });
 
-                // 더 이상 버튼을 클릭할 필요가 없으면 버튼을 비활성화합니다.
-                loadMoreButton.disabled = true;
+                    // 스크롤을 활성화하고 컨테이너의 높이를 조절
+                    divContainer.style.overflow = "auto";
+                    divContainer.style.height = "auto";
+
+                    // "더보기" 버튼에 "clicked" 클래스 추가
+                    loadMoreButton.classList.add("clicked");
+
+                    buttonClicked = true;
+                }
             });
         });
+
 
         async function getUserLocation() {
             return new Promise(function (resolve, reject) {
