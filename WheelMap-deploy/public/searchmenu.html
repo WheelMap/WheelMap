@@ -38,15 +38,17 @@
             </div>
             <div class="hidden-box">
                 <span class="place-text">
-                    <br>
-                    <b>상세주소</b><br>
-                    서울특별시 영등포구 도림동<br>
+                    <p> <span style="color: #222227; font-weight: 700; font-size: 18px;">상세주소</span> <br>
+                    <span style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
                     <hr>
-                    평일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    주말 운행시간 / 운영종료 / 9:00 ~ 18:00<br>
-                    공휴일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
+                    평일 운행시간 <span style="margin-left : 12%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                    <span style="margin-left: 50px; color : #6F6F6F">9:00 ~ 18:00</span><br><br>
+                    주말 운행시간 <span style="margin-left : 10.5%; color:#F2BD00; font-weight: 700;">운영종료</span> 
+                    <span style="margin-left: 50px; color : #6F6F6F">9:00 ~ 18:00</span><br><br>
+                    공휴일 운행시간 <span style="margin-left : 8%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                    <span style="margin-left: 50px; color : #6F6F6F">9:00 ~ 18:00</span><br><br>
                     <hr>
-                    전화걸기 <b>02-2670-1454</b>
+                    전화걸기 <span style="margin-left:133px; font-weight:600">02-2670-1454</span>
                 </span>
             </div>
         </div>
@@ -289,7 +291,7 @@
                     // 아래 아이템 컨테이너에 193px 여백 주기
                     const nextItemContainer = itemContainer.nextElementSibling;
                     if (nextItemContainer && nextItemContainer.classList.contains('item-container')) {
-                        nextItemContainer.style.marginTop = '193px';
+                        nextItemContainer.style.marginTop = '280px';
                     }
                 } else {
                     // hidden-box가 보이고 있을 때 처리
@@ -310,7 +312,7 @@
                 const menubox2 = document.getElementById('menubox2');
 
                 if (menuOpen) {
-                    menubox1.style.left = '-100%';
+                    menubox1.style.left = '-100';
                     menubox2.style.right = '-100%';
                     menuOpen = false;
                 } else {

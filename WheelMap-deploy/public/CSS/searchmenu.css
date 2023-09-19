@@ -82,17 +82,24 @@ input {
     right: 15px;
 }
 .hidden-box {
+    width: 90%;
     position: absolute;
     top: 100%;
     left: 0;
     display: none;
-    background-color: white;
+    background-color: rgba( 255, 255, 255, 0 );    
     z-index: 1;
     transition: top 0.3s ease;
+    margin-left: 24px;
 }
-.place-text {
-    padding: 10px 0 0 20px;
+.hidden-box > hr{
+    width: 30%;
+    border: 0.5px;
+    color: #D8D8D8;
 }
+/* .place-text {
+    padding: 5px 0 0 20px;
+} */
 
 .nav-toggle {
     font-size: 1.5rem;
