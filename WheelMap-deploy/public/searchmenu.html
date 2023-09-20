@@ -20,7 +20,7 @@
                 </div>
 
                 <form id="search-form">
-                    <input type="text" id="search-query" placeholder="장소를 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='장소를 입력하세요'">
+                    <input type="text" id="searchInput" placeholder="장소를 입력하세요" onfocus="this.placeholder=''"onblur="this.placeholder='장소를 입력하세요'"> 
                     <button type="submit"><i class='bx bx-search' style="font-size: 1.5rem;" onclick='search()'></i></button>
                 </form>
 
@@ -38,6 +38,7 @@
             <div class="hidden-box">
                 <span class="place-text">
                     <p> <span style="color: #222227; font-weight: 700; font-size: 18px;">상세주소</span> <br>
+
                         <span id="address" style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
                         <hr>
                         평일 운행시간 <span id="weekday-state" style="margin-left : 17%; color:#F2BD00; font-weight: 700;">운영중</span> 
@@ -49,6 +50,7 @@
                         <hr>
                         전화걸기 <span id="pnumber" style="margin-left:133px; font-weight:600;">02-2670-1454</span>
                     </p>
+
                 </span>
             </div>
         </div>
