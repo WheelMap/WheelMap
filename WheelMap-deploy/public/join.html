@@ -95,12 +95,11 @@
                 console.log(resultData);
                 console.log();
                 
-                profileImg1 = 'https://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg';
-                console.log("이미지 주소 : " + profileImg1);
+                // profileImg1 = 'https://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg';
+                // console.log("이미지 주소 : " + profileImg1);
                 // // console.log(newProfileImageUrl);
                 // const newProfileImageUrl = resultData.properties.profile_image.replace("http://", "https://");
-                // $("#profile").attr("src", newProfileImageUrl);
-                $("#profile").attr("src", profileImg1);
+                $("#profile").attr("src", resultData.properties.profile_image);
                 $("#name").val(resultData.properties.nickname);
                 $("#email").val(resultData.kakao_account.email);
                 getKakaoApi(token, resultData.id);
