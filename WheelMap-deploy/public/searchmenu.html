@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +12,6 @@
 </head>
 
 <body>
-
     <div id="box">
         <div class="nav container">
             <div class="flex">
@@ -31,7 +29,6 @@
 
         <div id="searchResults"></div>
         <div style="padding-top: 15px;"></div>
-
         <div class="item-container" onclick="toggleBackgroundColorAndHiddenBox(this);">
             <div class="star-rating">
                 <i class="fas fa-star" id="star-icon" onclick="toggleStarColor(this)"></i>
@@ -41,16 +38,19 @@
             <div class="hidden-box">
                 <span class="place-text">
                     <p> <span style="color: #222227; font-weight: 700; font-size: 18px;">상세주소</span> <br>
-                        <span style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
+
+                        <span id="address" style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
                         <hr>
-                        평일 운행시간 <span style="margin-left : 12%; color:#F2BD00; font-weight: 700;">운영중</span>
-                        <span style="margin-left: 50px; color : #6F6F6F">9:00 ~ 18:00</span><br><br>
-                        주말 운행시간 <span style="margin-left : 10.5%; color:#F2BD00; font-weight: 700;">운영종료</span>
-                        <span style="margin-left: 50px; color : #6F6F6F">9:00 ~ 18:00</span><br><br>
-                        공휴일 운행시간 <span style="margin-left : 8%; color:#F2BD00; font-weight: 700;">운영중</span>
-                        <span style="margin-left: 50px; color : #6F6F6F">9:00 ~ 18:00</span><br><br>
+                        평일 운행시간 <span id="weekday-state" style="margin-left : 17%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="weekday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        주말 운행시간 <span id="weekend-state" style="margin-left : 14.8%; color:#F2BD00; font-weight: 700;">운영종료</span> 
+                        <span id="weekend-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        공휴일 운행시간 <span id="holiday-state" style="margin-left : 13.3%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="holiday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
                         <hr>
-                        전화걸기 <span style="margin-left:133px; font-weight:600">02-2670-1454</span>
+                        전화걸기 <span id="pnumber" style="margin-left:133px; font-weight:600;">02-2670-1454</span>
+                    </p>
+
                 </span>
             </div>
         </div>
@@ -62,15 +62,18 @@
             </div>
             <div class="hidden-box">
                 <span class="place-text">
-                    <br>
-                    <b>상세주소</b><br>
-                    서울특별시 영등포구 도림동<br>
-                    <hr>
-                    평일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    주말 운행시간 / 운영종료 / 9:00 ~ 18:00<br>
-                    공휴일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    <hr>
-                    전화걸기 <b>02-2670-1454</b>
+                    <p> <span style="color: #222227; font-weight: 700; font-size: 18px;">상세주소</span> <br>
+                        <span id="address" style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
+                        <hr>
+                        평일 운행시간 <span id="weekday-state" style="margin-left : 17%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="weekday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        주말 운행시간 <span id="weekend-state" style="margin-left : 14.8%; color:#F2BD00; font-weight: 700;">운영종료</span> 
+                        <span id="weekend-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        공휴일 운행시간 <span id="holiday-state" style="margin-left : 13.3%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="holiday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        <hr>
+                        전화걸기 <span id="pnumber" style="margin-left:133px; font-weight:600;">02-2670-1454</span>
+                    </p>
                 </span>
             </div>
         </div>
@@ -82,15 +85,18 @@
             </div>
             <div class="hidden-box">
                 <span class="place-text">
-                    <br>
-                    <b>상세주소</b><br>
-                    서울특별시 영등포구 도림동<br>
-                    <hr>
-                    평일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    주말 운행시간 / 운영종료 / 9:00 ~ 18:00<br>
-                    공휴일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    <hr>
-                    전화걸기 <b>02-2670-1454</b>
+                    <p> <span style="color: #222227; font-weight: 700; font-size: 18px;">상세주소</span> <br>
+                        <span id="address" style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
+                        <hr>
+                        평일 운행시간 <span id="weekday-state" style="margin-left : 17%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="weekday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        주말 운행시간 <span id="weekend-state" style="margin-left : 14.8%; color:#F2BD00; font-weight: 700;">운영종료</span> 
+                        <span id="weekend-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        공휴일 운행시간 <span id="holiday-state" style="margin-left : 13.3%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="holiday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        <hr>
+                        전화걸기 <span id="pnumber" style="margin-left:133px; font-weight:600;">02-2670-1454</span>
+                    </p>
                 </span>
             </div>
         </div>
@@ -102,15 +108,18 @@
             </div>
             <div class="hidden-box">
                 <span class="place-text">
-                    <br>
-                    <b>상세주소</b><br>
-                    서울특별시 영등포구 도림동<br>
-                    <hr>
-                    평일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    주말 운행시간 / 운영종료 / 9:00 ~ 18:00<br>
-                    공휴일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    <hr>
-                    전화걸기 <b>02-2670-1454</b>
+                    <p> <span style="color: #222227; font-weight: 700; font-size: 18px;">상세주소</span> <br>
+                        <span id="address" style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
+                        <hr>
+                        평일 운행시간 <span id="weekday-state" style="margin-left : 17%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="weekday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        주말 운행시간 <span id="weekend-state" style="margin-left : 14.8%; color:#F2BD00; font-weight: 700;">운영종료</span> 
+                        <span id="weekend-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        공휴일 운행시간 <span id="holiday-state" style="margin-left : 13.3%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="holiday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        <hr>
+                        전화걸기 <span id="pnumber" style="margin-left:133px; font-weight:600;">02-2670-1454</span>
+                    </p>
                 </span>
             </div>
         </div>
@@ -122,15 +131,18 @@
             </div>
             <div class="hidden-box">
                 <span class="place-text">
-                    <br>
-                    <b>상세주소</b><br>
-                    서울특별시 영등포구 도림동<br>
-                    <hr>
-                    평일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    주말 운행시간 / 운영종료 / 9:00 ~ 18:00<br>
-                    공휴일 운행시간 / 운영중 / 9:00 ~ 18:00<br>
-                    <hr>
-                    전화걸기 <b>02-2670-1454</b>
+                    <p> <span style="color: #222227; font-weight: 700; font-size: 18px;">상세주소</span> <br>
+                        <span id="address" style="color: #5B5B5B; font-size: 16;">서울 특별시 영등포구 도림동</span>
+                        <hr>
+                        평일 운행시간 <span id="weekday-state" style="margin-left : 17%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="weekday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        주말 운행시간 <span id="weekend-state" style="margin-left : 14.8%; color:#F2BD00; font-weight: 700;">운영종료</span> 
+                        <span id="weekend-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        공휴일 운행시간 <span id="holiday-state" style="margin-left : 13.3%; color:#F2BD00; font-weight: 700;">운영중</span> 
+                        <span id="holiday-time" style="float: right;color : #6F6F6F; position:absolute; right: 20px;">9:00 ~ 18:00</span><br><br>
+                        <hr>
+                        전화걸기 <span id="pnumber" style="margin-left:133px; font-weight:600;">02-2670-1454</span>
+                    </p>
                 </span>
             </div>
         </div>
@@ -170,14 +182,12 @@
             </div>
             <div id="menubox2"></div>
         </div>
-
         <script>
             document.getElementById("place1").innerHTML = localStorage.getItem("facility_name1");
             document.getElementById("place2").innerHTML = localStorage.getItem("facility_name2");
             document.getElementById("place3").innerHTML = localStorage.getItem("facility_name3");
             document.getElementById("place4").innerHTML = localStorage.getItem("facility_name4");
             document.getElementById("place5").innerHTML = localStorage.getItem("facility_name5");
-
             // 검색 기능을 호출하는 함수
             function search() {
                 // 검색어 가져오기
@@ -200,12 +210,10 @@
                         console.error('오류 발생:', error);
                     });
             }
-
             // 검색 결과를 표시하는 함수
             function displaySearchResults(results) {
                 const searchResults = document.getElementById('searchResults');
                 searchResults.innerHTML = ''; // 이전 결과 지우기
-
                 if (results.length === 0) {
                     searchResults.innerHTML = '<p>검색 결과가 없습니다.</p>';
                 } else {
@@ -216,10 +224,8 @@
                         resultElement.onclick = function () {
                             toggleBackgroundColorAndHiddenBox(this);
                         };
-
                         // 필요한 정보를 추가로 표시
                         const storeId = result.id; // 상점 ID 추가
-
                         //     resultElement.innerHTML = `
                         //     <div class="item-container" onclick="toggleBackgroundColorAndHiddenBox(this);">
                         //     <div class="star-rating">
@@ -240,7 +246,6 @@
                         //     </div>
                         //     </div>
                         //   `;
-
                         searchResults.appendChild(resultElement);
                     });
                 }
@@ -248,12 +253,10 @@
             function clickLike(user_id, store_id, starIcon) {
                 // API를 호출하여 찜 추가
                 const apiEndpoint = 'http://localhost:3000/like';
-
                 const requestData = {
                     'user_id': 1,
                     'store_id': store_id,
                 };
-
                 fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {
@@ -274,18 +277,15 @@
             }
             let starColor = '#EAEAEA';
             let backgroundColor = false;
-
             function toggleStarColor(element) {
                 const starIcon = element;
                 if (starColor === '#EAEAEA') starColor = '#FFC700';
                 else starColor = '#EAEAEA';
                 starIcon.style.color = starColor;
             }
-
             function toggleBackgroundColorAndHiddenBox(element) {
                 const itemContainer = element;
                 const hiddenBox = itemContainer.querySelector('.hidden-box');
-
                 if (hiddenBox.style.display === 'none' || hiddenBox.style.display === '') {
                     // hidden-box가 숨겨져 있을 때 처리
                     itemContainer.style.backgroundColor = '#FFE999';
@@ -307,9 +307,7 @@
                     }
                 }
             }
-
             let menuOpen = false;
-
             function toggleMenu() {
                 const menubox1 = document.getElementById('menubox1');
                 const menubox2 = document.getElementById('menubox2');
@@ -326,7 +324,6 @@
                     menuOpen = true;
                 }
             }
-
             function toggleMenuIcon(element) {
                 const navToggle = element;
                 const icon = navToggle.querySelector('i');
@@ -335,5 +332,4 @@
             }
         </script>
 </body>
-
 </html>
