@@ -39,7 +39,7 @@
         const searchTerm = document.getElementById('searchInput').value;
 
         // 서버에 POST 요청 보내기
-        fetch('http://localhost:3000/search', {
+        fetch('http://ec2-52-79-64-36.ap-northeast-2.compute.amazonaws.com/search', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@
 }
 function clickUnlike(user_id, store_id, starIcon) {
     // "좋아요"를 제거하는 API
-    const apiEndpoint = 'http://localhost:3000/unlike';
+    const apiEndpoint = 'http://ec2-52-79-64-36.ap-northeast-2.compute.amazonaws.com/unlike';
 
     const requestData = {
         'user_id': 1,
@@ -127,7 +127,7 @@ function clickUnlike(user_id, store_id, starIcon) {
 }
 function clickLike(user_id, store_id, starIcon) {
     // API를 호출하여 찜 추가
-    const apiEndpoint = 'http://localhost:3000/like';
+    const apiEndpoint = 'http://ec2-52-79-64-36.ap-northeast-2.compute.amazonaws.com/like';
 
     const requestData = {
         'user_id': 1,
