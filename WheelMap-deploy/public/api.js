@@ -219,6 +219,7 @@ app.get(`/liked-places`, (req, res) => {
 });
 
 app.get('/sendLocation', async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const latitude = req.query.latitude;
   const longitude = req.query.longitude;
   const sql = `
