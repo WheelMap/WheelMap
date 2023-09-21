@@ -32,7 +32,7 @@
         function fetchLikedPlaces() {
             const userId = encodeURIComponent(localStorage.getItem("name")); // 사용자 ID 예시
             // 서버로 GET 요청 보내기
-            fetch(`http://localhost:3000/liked-places?id=${userId}`, {
+            fetch(`http://ec2-52-79-64-36.ap-northeast-2.compute.amazonaws.com/liked-places?id=${userId}`, {
                 method: 'GET'
             })
                 .then(response => response.json()) // JSON으로 파싱
