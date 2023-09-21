@@ -7,7 +7,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 app.use(bodyParser.json());
 app.use(cors());
