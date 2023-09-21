@@ -12,6 +12,13 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
+let corsOptions = {
+  origin: '*',      // 출처 허용 옵션
+  credential: true, // 사용자 인증이 필요한 리소스(쿠키 등) 접근
+}
+
+app.use(cors(corsOptions));
+
 const db = mysql.createConnection({
   host : 'database-1.cn157xzbpuce.ap-northeast-2.rds.amazonaws.com',
   user: 'admin',
