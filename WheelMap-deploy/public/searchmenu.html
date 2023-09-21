@@ -194,7 +194,7 @@
                 const searchTerm = document.getElementById('searchInput').value;
                 console.log(searchTerm);
                 // 서버에 POST 요청 보내기
-                fetch('http://localhost:3000/search', {
+                fetch('http://ec2-52-79-64-36.ap-northeast-2.compute.amazonaws.com/search', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -252,7 +252,8 @@
             }
             function clickLike(user_id, store_id, starIcon) {
                 // API를 호출하여 찜 추가
-                const apiEndpoint = 'http://localhost:3000/like';
+                const apiEndpoint = 'http://ec2-52-79-64-36.ap-northeast-2.compute.amazonaws.com/like';
+
                 const requestData = {
                     'user_id': 1,
                     'store_id': store_id,

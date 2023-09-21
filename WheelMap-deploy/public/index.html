@@ -159,7 +159,7 @@
                 console.log(latitude);
                 console.log(longitude);
                 // 위도와 경도를 서버로 전송
-                const response = await axios.get(`http://localhost:3000/sendLocation?latitude=${latitude}&longitude=${longitude}`);
+                const response = await axios.get(`http://ec2-52-79-64-36.ap-northeast-2.compute.amazonaws.com/sendLocation?latitude=${latitude}&longitude=${longitude}`);
 
                 if (response.status === 200) {
                     console.log('위치 정보가 서버로 전송되었습니다.');
