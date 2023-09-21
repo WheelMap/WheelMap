@@ -12,6 +12,11 @@ const PORT = process.env.PORT || 80;
 app.use(bodyParser.json());
 app.use(cors());
 
+<meta 
+  httpEquiv="Content-Security-Policy" 
+  content="upgrade-insecure-requests" 
+/>
+
 const db = mysql.createConnection({
   host : 'database-1.cn157xzbpuce.ap-northeast-2.rds.amazonaws.com',
   user: 'admin',
