@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +24,15 @@
 <body>
 
     <div id="box">
-        
+
         <div class="nav container">
             <div class="flex">
                 <div class="nav-toggle" id="nav_toggle" onclick="toggleMenu(); toggleMenuIcon(this);">
                     <i class='bx bx-menu' style="font-size: 1.5rem;"></i>
                 </div>
                 <form id="search-form">
-                    <input type="text" id="search-query" placeholder="장소를 입력하세요" onfocus="this.placeholder=''" onblur="this.placeholder='장소를 입력하세요'" onclick="window.location.href='searchmenu.html'">
+                    <input type="text" id="search-query" placeholder="장소를 입력하세요" onfocus="this.placeholder=''"
+                        onblur="this.placeholder='장소를 입력하세요'" onclick="window.location.href='searchmenu.html'">
                     <button type="submit"><i class='bx bx-search' style="font-size: 1.5rem;"></i></button>
                 </form>
             </div>
@@ -52,17 +54,17 @@
                     <div id="e2" class="spotbox" onclick="moveToNavigation3()">
                     </div>
                     <div id="div-container">
-                        <div id = "f2" class="hidden spotbox" onclick="moveToNavigation4()"></div>
-                        <div id= "g2" class="hidden spotbox" onclick="moveToNavigation5()"></div>
+                        <div id="f2" class="hidden spotbox" onclick="moveToNavigation4()"></div>
+                        <div id="g2" class="hidden spotbox" onclick="moveToNavigation5()"></div>
                     </div>
                 </div>
             </div>
-            
+
             <button class="more" id="load-more-button">
                 <hr>
                 더보기
             </button>
-            
+
         </div>
         <div id="menu">
             <div id="menubox1">
@@ -79,17 +81,20 @@
                     <div class="side-menu">
                         이용약관
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;"
+                            onclick="window.location.href='test.html'"></i>
                     </div>
                     <div class="side-menu">
                         버전
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;"
+                            onclick="window.location.href='test.html'"></i>
                     </div>
                     <div class="side-menu">
                         문의하기
                         <i class="fas fa-chevron-right"
-                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;" onclick="window.location.href='test.html'"></i>
+                            style="font-size: 1rem; position: absolute; right: 40px; margin-top: 10px; color:gray;"
+                            onclick="window.location.href='test.html'"></i>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -116,8 +121,8 @@
             loadMoreButton.addEventListener("click", function () {
                 if (!buttonClicked) {
                     initialDivs.forEach(function (div) {
-                        div.style.display = "block";  
-                        div.style.display = "flex"    
+                        div.style.display = "block";
+                        div.style.display = "flex"
                         div.style.height = "55px";
                         div.style.fontSize = "1.2rem";
                         div.style.alignItems = "center";
@@ -255,7 +260,6 @@
             var facility_name = document.getElementById("d2").dataset.facility_name;
             location.href = `navigation.html?latitude=${latitude}&longitude=${longitude}&address=${address}&facility_name=${facility_name}`;
         }
-
         function moveToNavigation3() {
             var longitude = document.getElementById("e2").dataset.longitude;
             var latitude = document.getElementById("e2").dataset.latitude;
@@ -263,7 +267,7 @@
             var facility_name = document.getElementById("e2").dataset.facility_name;
             location.href = `navigation.html?latitude=${latitude}&longitude=${longitude}&address=${address}&facility_name=${facility_name}`;
         }
-        
+
         function moveToNavigation4() {
             var longitude = document.getElementById("f2").dataset.longitude;
             var latitude = document.getElementById("f2").dataset.latitude;
@@ -282,4 +286,5 @@
 
     </script>
 </body>
+
 </html>
