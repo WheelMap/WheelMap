@@ -7,15 +7,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
-
-<meta 
-  httpEquiv="Content-Security-Policy" 
-  content="upgrade-insecure-requests" 
-/>
 
 const db = mysql.createConnection({
   host : 'database-1.cn157xzbpuce.ap-northeast-2.rds.amazonaws.com',
@@ -224,7 +219,7 @@ app.get(`/liked-places`, (req, res) => {
 });
 
 app.get('/sendLocation', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Origin", "*");
   const latitude = req.query.latitude;
   const longitude = req.query.longitude;
   const sql = `
