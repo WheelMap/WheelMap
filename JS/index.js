@@ -1,7 +1,34 @@
-let map;
-let latitude;
-let longitude;
 let menuOpen = false;
+
+document.addEventListener("DOMContentLoaded", function () {
+    const loadMoreButton = document.getElementById("load-more-button");
+    const divContainer = document.querySelector(".scroll");
+    const initialDivs = divContainer.querySelectorAll(".hidden");
+    let buttonClicked = false;
+
+    // 더보기 버튼 클릭 시, 숨겨진 div를 보이도록 토글하고 스크롤을 활성화합니다.
+    loadMoreButton.addEventListener("click", function () {
+        if (!buttonClicked) {
+            initialDivs.forEach(function (div) {
+                div.style.display = "block";
+                div.style.display = "flex"
+                div.style.height = "55px";
+                div.style.fontSize = "1.2rem";
+                div.style.alignItems = "center";
+                div.classList.remove("hidden");
+            });
+
+            // 스크롤을 활성화하고 컨테이너의 높이를 조절
+            divContainer.style.overflow = "auto";
+            divContainer.style.height = "auto";
+
+            // "더보기" 버튼에 "clicked" 클래스 추가
+            loadMoreButton.classList.add("clicked");
+
+            buttonClicked = true;
+        }
+    });
+});
 
 function toggleMenu() {
     const menubox1 = document.getElementById('menubox1');
@@ -20,58 +47,7 @@ function toggleMenu() {
 
 function toggleMenuIcon(element) {
     const navToggle = element;
-    const icon = navToggle.querySelector('i');
+    const icon = navToggle.querySelector('i')
     if (menuOpen) icon.classList.add('bx-x');
     else icon.classList.remove('bx-x');
 }
-
-// 위치 정보를 가져오는 비동기 함수
-function getUserLocation() {
-    return new Promise(function (resolve, reject) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-            resolve();
-        }, function (error) {
-            reject(error);
-        });
-    });
-}
-
-// 페이지가 로딩이 된 후 호출하는 함수입니다.
-async function initializeMap() {
-    try {
-        await getUserLocation();
-        // api 불러오기
-        var headers = {};
-        headers["appKey"] = "q1hz24YqUC7g84TRhAW3v8a52xq51B3472o9tPeF";
-        // map 생성
-        map = new Tmapv2.Map("map", { // 지도가 생성될 div
-            center: new Tmapv2.LatLng(latitude, longitude),
-            width: "100%",   // 지도의 넓이
-            height: "95%",   // 지도의 높이
-            zoom: 16   // 지도 줌레벨
-        });
-
-        // 시작 심볼 찍기
-        marker_s = new Tmapv2.Marker(
-            {
-                position: new Tmapv2.LatLng(latitude, longitude),
-                icon: "image/MyLocationMarker.png",
-                iconSize: new Tmapv2.Size(14, 14),
-                map: map
-            });
-    } catch (error) {
-        console.error("Error initializing map:", error);
-    }
-
-}
-
-async function initTmap() {
-    try {
-        initializeMap();
-    } catch (error) {
-        console.log("Error");
-    }
-}
-
