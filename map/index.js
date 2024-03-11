@@ -22,12 +22,13 @@ async function initializeMap() {
         // api 불러오기
         var headers = {};
         headers["appKey"] = "q1hz24YqUC7g84TRhAW3v8a52xq51B3472o9tPeF";
+        console.log(latitude + " " + longitude);
         // map 생성
         map = new Tmapv2.Map("map", { // 지도가 생성될 div
             center: new Tmapv2.LatLng(latitude, longitude),
             width: "100%",   // 지도의 넓이
             height: "95%",   // 지도의 높이
-            zoom: 16   // 지도 줌레벨
+            zoom: 18   // 지도 줌레벨
         });
 
         // 시작 심볼 찍기
@@ -35,7 +36,7 @@ async function initializeMap() {
             {
                 position: new Tmapv2.LatLng(latitude, longitude),
                 icon: "image/MyLocationMarker.png",
-                iconSize: new Tmapv2.Size(14, 14),
+                iconSize: new Tmapv2.Size(21, 21),
                 map: map
             });
     } catch (error) {
